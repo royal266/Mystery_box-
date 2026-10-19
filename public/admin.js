@@ -111,7 +111,7 @@
           .join("");
         return `
           <div class="admin-mission-group">
-            <div class="admin-mission-group-title">${escapeHtml(group.sectionTitle)} ${group.category === "keys" ? "(ключі)" : "(RP)"}</div>
+            <div class="admin-mission-group-title">${escapeHtml(group.sectionTitle)} ${group.category === "keys" ? "(ключі)" : "(RD)"}</div>
             ${rows}
           </div>
         `;
@@ -179,7 +179,7 @@
           .join("");
         return `
           <div class="admin-mission-group">
-            <div class="admin-mission-group-title">${escapeHtml(group.sectionTitle)} ${group.category === "keys" ? "(ключі)" : "(RP)"}</div>
+            <div class="admin-mission-group-title">${escapeHtml(group.sectionTitle)} ${group.category === "keys" ? "(ключі)" : "(RD)"}</div>
             ${rows}
           </div>
         `;
@@ -224,7 +224,7 @@
 
       <div class="admin-card">
         <h3>Товари магазину</h3>
-        <p class="admin-hint">Змінюйте назву, ціну, картинку або доступність товарів, які вже є в Royal Store. Зміни одразу зʼявляються в застосунку.</p>
+        <p class="admin-hint">Змінюйте назву, ціну, картинку або доступність товарів, які вже є в RD Store. Зміни одразу зʼявляються в застосунку.</p>
         <div id="shopItemsList">${renderShopItems(shopItems)}</div>
       </div>
 
@@ -276,7 +276,7 @@
       showStatus(
         statusEl,
         true,
-        `Ім'я: ${u.displayName ? escapeHtml(u.displayName) : "не вказано"} · ClubGG ID: ${u.clubGgId ? escapeHtml(u.clubGgId) : "не вказано"} · Ключі: ${u.tickets} · RP: ${u.rpPoints}`
+        `Ім'я: ${u.displayName ? escapeHtml(u.displayName) : "не вказано"} · ClubGG ID: ${u.clubGgId ? escapeHtml(u.clubGgId) : "не вказано"} · Ключі: ${u.tickets} · RD: ${u.rpPoints}`
       );
     } catch (e) {
       showStatus(statusEl, false, "Помилка: " + e.message);
@@ -397,7 +397,7 @@
       const missionIdx = ALL_MISSIONS.findIndex((m) => m.id === missionId);
       if (missionIdx !== -1) {
         ALL_MISSIONS[missionIdx].label = data.item.label;
-        ALL_MISSIONS[missionIdx].reward = data.item.category === "keys" ? data.item.rewardLabel : `${data.item.rewardAmount} RP`;
+        ALL_MISSIONS[missionIdx].reward = data.item.category === "keys" ? data.item.rewardLabel : `${data.item.rewardAmount} RD`;
         const labelSpan = document.querySelector(`.admin-mission-label[data-mission-id="${missionId}"]`) || document.querySelector(`[data-mission-id="${missionId}"] .admin-mission-label`);
         if (labelSpan) labelSpan.textContent = ALL_MISSIONS[missionIdx].label;
         const rewardSpan = document.querySelector(`[data-mission-reward="${missionId}"]`);
@@ -458,7 +458,7 @@
         method: "POST",
         body: { initData: getInitData(), targetUserId, missionId, confirmed },
       });
-      const balanceNote = `(Ключі: ${data.tickets}, RP: ${data.rpPoints})`;
+      const balanceNote = `(Ключі: ${data.tickets}, RD: ${data.rpPoints})`;
       showStatus(
         statusEl,
         true,

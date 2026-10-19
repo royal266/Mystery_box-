@@ -280,7 +280,7 @@ app.get("/api/admin/mission-items", requireAdmin, (req, res) => {
 
 // Edit an existing mission. Admins can only change label/reward/active on
 // missions that already exist - this endpoint does not create or delete
-// missions, nor move a mission between the RP/keys categories.
+// missions, nor move a mission between the RD/keys categories.
 app.put("/api/admin/mission-items/:id", requireAdmin, (req, res) => {
   const { id } = req.params;
   const existing = db.getMissionItem(id);

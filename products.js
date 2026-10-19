@@ -7,10 +7,10 @@
 // changing them once the app has real data.
 const SHOP_SEED = [
   // --- Брендовий мерч -----------------------------------------------
-  { id: "merch-set", sectionId: "merch", sectionTitle: "Брендовий мерч", sectionIcon: "crown", sectionSubtitle: null, sectionOrder: 1, itemOrder: 1, label: "Set Royal Poker", price: 3200, img: "assets/set.png" },
-  { id: "merch-mug", sectionId: "merch", sectionTitle: "Брендовий мерч", sectionIcon: "crown", sectionSubtitle: null, sectionOrder: 1, itemOrder: 2, label: "Royal Poker кружка", price: 850, img: "assets/mug.png" },
-  { id: "merch-cap", sectionId: "merch", sectionTitle: "Брендовий мерч", sectionIcon: "crown", sectionSubtitle: null, sectionOrder: 1, itemOrder: 3, label: "Royal Poker кепка", price: 1100, img: "assets/cap.png" },
-  { id: "merch-thermos", sectionId: "merch", sectionTitle: "Брендовий мерч", sectionIcon: "crown", sectionSubtitle: null, sectionOrder: 1, itemOrder: 4, label: "Royal Poker термос", price: 2100, img: "assets/thermos.png" },
+  { id: "merch-set", sectionId: "merch", sectionTitle: "Брендовий мерч", sectionIcon: "crown", sectionSubtitle: null, sectionOrder: 1, itemOrder: 1, label: "Set RD", price: 3200, img: "assets/set.png" },
+  { id: "merch-mug", sectionId: "merch", sectionTitle: "Брендовий мерч", sectionIcon: "crown", sectionSubtitle: null, sectionOrder: 1, itemOrder: 2, label: "RD кружка", price: 850, img: "assets/mug.png" },
+  { id: "merch-cap", sectionId: "merch", sectionTitle: "Брендовий мерч", sectionIcon: "crown", sectionSubtitle: null, sectionOrder: 1, itemOrder: 3, label: "RD кепка", price: 1100, img: "assets/cap.png" },
+  { id: "merch-thermos", sectionId: "merch", sectionTitle: "Брендовий мерч", sectionIcon: "crown", sectionSubtitle: null, sectionOrder: 1, itemOrder: 4, label: "RD термос", price: 2100, img: "assets/thermos.png" },
 
   // --- Ваучери 3 доби -------------------------------------------------
   { id: "voucher-50", sectionId: "vouchers", sectionTitle: "Ваучери 3 доби", sectionIcon: "ticket", sectionSubtitle: "Ваучер", sectionOrder: 2, itemOrder: 1, label: "50", price: 80, img: null },

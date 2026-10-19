@@ -10,7 +10,7 @@ const os = require("os");
 // system fonts (if any) happen to be present. This MUST run before "sharp"
 // is required below, since libvips/librsvg reads FONTCONFIG_PATH on init.
 const BUNDLED_FONTS_DIR = path.join(__dirname, "assets/fonts");
-const FONTCONFIG_DIR = path.join(os.tmpdir(), "royal-miniapp-fontconfig");
+const FONTCONFIG_DIR = path.join(os.tmpdir(), "rd-miniapp-fontconfig");
 try {
   fs.mkdirSync(FONTCONFIG_DIR, { recursive: true });
   fs.writeFileSync(
@@ -106,7 +106,7 @@ function buildCaption(displayName, prizeLabel) {
     `Вітаємо: ${escapeHtml(displayName)}\n\n` +
     `Твій Золотий Ключ відкрив Mystery Box, а удача сьогодні обрала саме тебе!\n\n` +
     `🎁 Приз: ${escapeHtml(prizeLabel)}\n\n` +
-    `Бажаємо ще більше вдалих відкриттів, цінних нагород та великих перемог за столами Royal Online Poker! 🎁`
+    `Бажаємо ще більше вдалих відкриттів, цінних нагород та великих перемог за столами RD! 🎁`
   );
 }
 

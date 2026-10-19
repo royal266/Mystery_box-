@@ -127,7 +127,7 @@ async function notifyAdminsOfPurchase(user, item, clubGgId, verifiedName) {
     `Telegram ID: <code>${user.id}</code>\n` +
     `ClubGG ID: <code>${escapeHtml(clubGgId || "не вказано")}</code>\n` +
     `Що купив: <b>${escapeHtml(item.label)}</b>\n` +
-    `Вартість: <b>${item.price} RP</b>`;
+    `Вартість: <b>${item.price} RD</b>`;
 
   await Promise.all(ADMIN_IDS.map((adminId) => sendTelegramMessage(adminId, text)));
 }

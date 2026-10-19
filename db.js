@@ -96,7 +96,7 @@ function ensureBoxesOpenedColumn() {
 ensureBoxesOpenedColumn();
 
 // Older databases won't have this column yet. The leaderboard now ranks by
-// lifetime RP earned (so spending RP in the shop doesn't hurt your rank)
+// lifetime RD earned (so spending RD in the shop doesn't hurt your rank)
 // instead of the spendable rpPoints balance. Back-fill it from each user's
 // current rpPoints so existing players don't drop to the bottom of the top.
 function ensureTotalRpEarnedColumn() {
@@ -248,6 +248,30 @@ function seedMissionItemsIfNeeded() {
 }
 
 seedMissionItemsIfNeeded();
+
+/* ------------------------------------------------------------------ */
+/* One-time rebrand Royal Poker -> RD for data already in the DB.      */
+/* Seeds only run on an empty DB, so existing installs need this to    */
+/* rename products / missions / purchase history. Idempotent: rows     */
+/* that are already renamed simply don't match the WHERE clauses.      */
+/* ------------------------------------------------------------------ */
+function rebrandExistingDataToRd() {
+  const fix = (col) =>
+    `REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(${col}, 'Royal Points (RP)', 'RD Points'), 'RP Points', 'RD Points'), 'Royal Online Poker', 'RD'), 'Royal Poker', 'RD'), 'Royal Store', 'RD Store')`;
+  const like = (col) =>
+    `(${col} LIKE '%Royal%' OR ${col} LIKE '%RP Points%')`;
+  const run = db.transaction(() => {
+    const a = db.prepare(`UPDATE shop_items SET label = ${fix("label")}, sectionTitle = ${fix("sectionTitle")} WHERE ${like("label")} OR ${like("sectionTitle")}`).run().changes;
+    const b = db.prepare(`UPDATE mission_items SET label = ${fix("label")} WHERE ${like("label")}`).run().changes;
+    const c = db.prepare(`UPDATE mission_items SET rewardLabel = 'RD' WHERE rewardLabel = 'RP'`).run().changes;
+    const d = db.prepare(`UPDATE users SET history = ${fix("history")} WHERE ${like("history")}`).run().changes;
+    return a + b + c + d;
+  });
+  const changed = run();
+  if (changed) console.log(`[db] Rebranded ${changed} row(s) from Royal Poker to RD`);
+}
+
+rebrandExistingDataToRd();
 
 function syncMissionSeedItems() {
   const insert = db.prepare(`
@@ -444,7 +468,7 @@ function getMissionPeriod(mission) {
   if (!mission) return "weekly";
   if (mission.sectionId === "daily" || String(mission.id).startsWith("daily-")) return "daily";
   if (mission.sectionId === "weekly" || String(mission.id).startsWith("weekly-")) return "weekly";
-  // "Активність" sections - RP tab uses sectionId "activity", Keys tab uses
+  // "Активність" sections - RD tab uses sectionId "activity", Keys tab uses
   // sectionId "streak" - reset once a month instead of weekly.
   if (mission.sectionId === "activity" || mission.sectionId === "streak") return "monthly";
   return "weekly";
@@ -517,7 +541,7 @@ function setMissionSelected(telegramId, missionId, selected) {
 
 // Admin confirms (or un-confirms) that a user completed a mission. The
 // first time a mission is confirmed for the current week it credits the
-// reward - keys for category "keys", RP for category "rp" - onto the
+// reward - keys for category "keys", RD for category "rp" - onto the
 // user's balance. Un-confirming reverses that same amount so toggling
 // the checkbox by mistake doesn't leave a permanent credit.
 //

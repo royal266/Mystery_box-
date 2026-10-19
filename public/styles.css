@@ -112,7 +112,7 @@ html, body { margin: 0; padding: 0; }
 }
 .mb-chest-wrap { width: 100%; aspect-ratio: 6 / 5; display: flex; align-items: center; justify-content: center; }
 
-/* ---------- branded Royal Poker chest artwork ---------- */
+/* ---------- branded RD chest artwork ---------- */
 .mb-box3d-scene {
   width: 100%; aspect-ratio: 6 / 5;
   position: relative;
